@@ -1,19 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createContext } from "react";
+import { Provider as AuthProvider } from "./contexts/authContext";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+// interface AppContextInterface {
+// 	user: {
+// 		id: number;
+// 		first_name: string;
+// 		last_name: string;
+// 		location: string;
+// 		token: string;
+// 	} | null;
+// }
+
+// export const AppContext = createContext<AppContextInterface | null>(null);
+
+// const defaultAppContext: AppContextInterface = {
+// 	user: {
+// 		id: 0,
+// 		first_name: "Admin",
+// 		last_name: "Real",
+// 		location: "nowhere",
+// 		token:
+// 			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDc2OGQ2ZDRlODc0OTAwMTVmODAzYWYiLCJpYXQiOjE2NTIwMjU1MTh9.zl988K-A7YeaY27EMR61U3_dJk3074l0gJnmyLH5m4g",
+// 	},
+// };
+
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+	// <AppContext.Provider value={defaultAppContext}>
+	<AuthProvider>
+		<App />
+	</AuthProvider>
+	// </AppContext.Provider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
