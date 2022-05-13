@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import "animate.css";
 import { Provider as AuthProvider } from "./contexts/authContext";
 import ReactDOM from "react-dom/client";
 import "./index.css";

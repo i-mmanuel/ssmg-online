@@ -14,7 +14,6 @@ const SignIn = (): JSX.Element => {
 	const formSubmit = (event: FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
 		context?.signIn({ email, password });
-		console.log(context?.state);
 	};
 
 	return (

@@ -49,11 +49,10 @@ const signIn =
 		}
 	};
 
-// const signout = dispatch => async () => {
-// 	await AsyncStorage.removeItem("token");
-// 	dispatch({ type: "signout" });
-// 	navigate("loginFlow");
-// };
+const signOut = (dispatch: any) => async () => {
+	await localStorage.removeItem("token");
+	dispatch({ type: "signout" });
+};
 
 // const clearErrorMessage = dispatch => () => {
 // 	dispatch({ type: "clear_error_message" });
@@ -76,4 +75,4 @@ const signIn =
 // 		}
 // 	};
 
-export const { Provider, Context } = createDataContext(authReducer, { signIn, localSignIn }, { token: "fghj" });
+export const { Provider, Context } = createDataContext(authReducer, { signIn, localSignIn, signOut }, {});

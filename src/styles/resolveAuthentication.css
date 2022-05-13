@@ -1,0 +1,19 @@
+/* #resolve-auth {
+	background: url("../videos/production_ID_3922709.mp4");
+	width: 100%;
+	height: 100vh;
+} */
+
+#video-background {
+	height: 100vh;
+	backdrop-filter: blur(5px);
+}
+
+#video-wrapper {
+	height: 100vh;
+	position: fixed;
+	width: 100%;
+	z-index: 99;
+	opacity: 0.5;
+	backdrop-filter: blur(5px);
+}

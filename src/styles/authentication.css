@@ -264,6 +264,7 @@ input[type="radio"] {
 img {
 	max-width: 100%;
 	height: auto;
+	margin: 0 auto;
 }
 
 figure {
@@ -401,7 +402,6 @@ figure {
 	border-bottom: none;
 	padding: 15px 39px;
 	border-radius: 5px;
-	width: auto;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-o-border-radius: 5px;

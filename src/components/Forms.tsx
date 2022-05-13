@@ -1,6 +1,5 @@
 import "../styles/authentication.css";
 import "../fonts/material-icon/css/material-design-iconic-font.min.css";
-import "animate.css";
 import { ReactNode } from "react";
 const logo = require("../images/whitelogo.png");
 
