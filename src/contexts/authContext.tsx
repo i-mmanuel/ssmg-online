@@ -1,62 +1,51 @@
-import { AxiosResponse } from "axios";
-import { useNavigate } from "react-router-dom";
-import api from "../api";
 import createDataContext from "./createDataContext";
-import { SIGN_IN } from "./types";
+import { ERROR, SIGN_IN, SIGN_OUT } from "./types";
+
+interface payloadProps {
+	user: object;
+	token: string;
+}
 
 interface actionProps {
 	type: string;
-	payload: string | object;
+	payload: payloadProps;
 }
 
-interface signinProps {
-	email: string;
-	password: string;
-}
-
-const authReducer = (state: {}, action: actionProps): object => {
-	switch (action.type) {
+const authReducer = (state: {}, { payload, type }: actionProps): object => {
+	switch (type) {
 		case SIGN_IN:
-			return { token: action.payload };
+			return { errorMessage: "", user: payload };
+		case ERROR:
+			return { ...state, errorMessage: payload };
+		case SIGN_OUT:
+			return { errorMessage: "" };
 		default:
 			return state;
 	}
 };
 
-const localSignIn = (dispatch: any) => () => {
-	const navigate = useNavigate();
-	const token: string | null = localStorage.getItem("token");
+const localSignIn = (dispatch: any) => async (response: object) => dispatch({ type: SIGN_IN, payload: response });
 
-	if (token) {
-		dispatch({ type: SIGN_IN, payload: token });
-		navigate("/bacenta/home");
-	} else {
-		navigate("/signin");
-	}
+const signOut = (dispatch: any) => () => {
+	localStorage.removeItem("token");
+
+	dispatch({ type: SIGN_OUT, payload: null });
 };
 
-const signIn =
-	(dispatch: any) =>
-	async ({ email, password }: signinProps) => {
-		try {
-			const response: AxiosResponse = await api.post("/signin", { email, password });
+const signIn = (dispatch: any) => (response: payloadProps) => {
+	const token: string = response.token;
+	localStorage.setItem("token", token);
 
-			localStorage.setItem("token", response.data.token);
-			dispatch({ type: SIGN_IN, payload: response.data.token });
-			console.log(response.data);
-		} catch (error) {
-			dispatch({ type: "add_error", payload: "Something went wrong with signing in" });
-		}
-	};
-
-const signOut = (dispatch: any) => async () => {
-	await localStorage.removeItem("token");
-	dispatch({ type: "signout" });
+	dispatch({ type: SIGN_IN, payload: response.user });
 };
 
 // const clearErrorMessage = dispatch => () => {
 // 	dispatch({ type: "clear_error_message" });
 // };
+
+const addError = (dispatch: any) => (error: string) => {
+	dispatch({ type: ERROR, payload: error });
+};
 
 // const signup =
 // 	dispatch =>
@@ -75,4 +64,4 @@ const signOut = (dispatch: any) => async () => {
 // 		}
 // 	};
 
-export const { Provider, Context } = createDataContext(authReducer, { signIn, localSignIn, signOut }, {});
+export const { Provider, Context } = createDataContext(authReducer, { signIn, addError, signOut, localSignIn }, {});

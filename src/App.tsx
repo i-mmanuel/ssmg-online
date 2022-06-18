@@ -8,7 +8,7 @@ const App = (): JSX.Element => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<ResolveAuthentication />} />
+				<Route path="/*" element={<ResolveAuthentication />} />
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/bacenta/home" element={<BacentaHome />} />

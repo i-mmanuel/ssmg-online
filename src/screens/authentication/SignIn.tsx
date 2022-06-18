@@ -1,20 +1,50 @@
 import { Context as AuthContext } from "../../contexts/authContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/authentication.css";
 import Forms from "../../components/Forms";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useCallback, useContext, useEffect, useState } from "react";
+import api from "../../api";
+import { AxiosResponse } from "axios";
 const logo = require("../../images/signup-image.jpg");
 
 const SignIn = (): JSX.Element => {
-	const [email, setEmail] = useState("bruce@wayne.com");
-	const [password, setPassword] = useState("Shame1!");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	const context = useContext(AuthContext);
+	const navigate = useNavigate();
 
-	const formSubmit = (event: FormEvent<HTMLFormElement>): void => {
+	const formSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		context?.signIn({ email, password });
+
+		try {
+			const response: AxiosResponse = await api.post("/signin", { email, password });
+			context?.signIn(response.data);
+			navigate("/bacenta/home");
+		} catch (error) {
+			alert("Wrong password");
+			context?.addError("Your username or password is incorrect");
+		}
 	};
+
+	const localSignIn = useCallback(async () => {
+		const token: string | null = localStorage.getItem("token");
+
+		if (token) {
+			try {
+				const response: AxiosResponse = await api.get("/signedin");
+
+				context?.localSignIn(response.data);
+				navigate("/bacenta/home");
+			} catch (error) {
+				context?.addError("Error signing in, try again");
+			}
+		}
+	}, [context, navigate]);
+
+	useEffect(() => {
+		localSignIn();
+	}, [localSignIn]);
 
 	return (
 		<Forms>
@@ -63,12 +93,12 @@ const SignIn = (): JSX.Element => {
 								</div>
 
 								<div className="form-group">
-									<input type="checkbox" name="remember-me" id="remember-me" className="agree-term" />
+									{/* <input type="checkbox" name="remember-me" id="remember-me" className="agree-term" /> */}
 									<label htmlFor="remember-me" className="label-agree-term">
 										<span>
 											<span></span>
 										</span>
-										Remember me
+										{context?.state.errorMessage}
 									</label>
 								</div>
 
@@ -82,27 +112,6 @@ const SignIn = (): JSX.Element => {
 									/>
 								</div>
 							</form>
-
-							{/* <div className="social-login">
-								<span className="social-label">Or login with</span>
-								<ul className="socials">
-									<li>
-										<a href="#">
-											<i className="display-flex-center zmdi zmdi-facebook"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i className="display-flex-center zmdi zmdi-twitter"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i className="display-flex-center zmdi zmdi-google"></i>
-										</a>
-									</li>
-								</ul>
-							</div> */}
 						</div>
 					</div>
 				</div>

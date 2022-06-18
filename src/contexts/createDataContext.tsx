@@ -1,11 +1,11 @@
 import { createContext, useReducer } from "react";
 
 interface contextProps {
-	localSignIn(): any;
+	localSignIn(user: object): void;
 	signIn(p: object): void;
-	state: {
-		token: string;
-	};
+	state: { user: object; errorMessage: string };
+	signOut(): void;
+	addError(message: String): void;
 }
 
 const createDataContext = (reducer: any, actions: any, defaultValue: object) => {

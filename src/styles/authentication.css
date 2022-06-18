@@ -287,12 +287,6 @@ h2 {
 	font-size: 36px;
 }
 
-.main {
-	width: 100%;
-	padding: 150px 0;
-	height: 100vh;
-}
-
 .clear {
 	clear: both;
 }
@@ -361,11 +355,6 @@ body {
 	-webkit-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
-}
-
-.signup,
-.sign-in {
-	margin-bottom: 150px;
 }
 
 .signup-content {
