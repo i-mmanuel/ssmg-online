@@ -3,7 +3,24 @@ import { createContext, useReducer } from "react";
 interface contextProps {
 	localSignIn(user: object): void;
 	signIn(p: object): void;
-	state: { user: object; errorMessage: string };
+	state: {
+		user: {
+			email_confirmed: boolean;
+			account_created: Date;
+			email: string;
+			password: string;
+			first_name: string;
+			last_name: string;
+			phone_number: string;
+			__v: number;
+			date_of_birth: string;
+			center: string;
+			profile_image: string;
+			notification_token: string;
+			membership_type: string;
+		};
+		errorMessage: string;
+	};
 	signOut(): void;
 	addError(message: String): void;
 }

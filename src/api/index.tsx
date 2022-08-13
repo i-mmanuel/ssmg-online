@@ -1,8 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { useNavigate } from "react-router-dom";
 import { baseUrl } from "./baseUrl";
 
 const api = axios.create({
 	baseURL: baseUrl,
+	timeout: 2500,
 });
 
 api.interceptors.request.use(
@@ -10,7 +12,7 @@ api.interceptors.request.use(
 		const token: string | null = localStorage.getItem("token");
 
 		if (token && config.headers !== undefined) {
-			config.headers.Authorization = `Bearer ${token}`;
+			config.headers.authorization = `Bearer ${token}`;
 		} else {
 			config.headers = {};
 		}

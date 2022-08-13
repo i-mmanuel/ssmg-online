@@ -2,13 +2,41 @@ import createDataContext from "./createDataContext";
 import { ERROR, SIGN_IN, SIGN_OUT } from "./types";
 
 interface payloadProps {
-	user: object;
+	user: {
+		email_confirmed: boolean;
+		account_created: Date;
+		email: string;
+		password: string;
+		first_name: string;
+		last_name: string;
+		phone_number: string;
+		__v: number;
+		date_of_birth: string;
+		center: string;
+		profile_image: string;
+		notification_token: string;
+		membership_type: string;
+	};
 	token: string;
 }
 
 interface actionProps {
 	type: string;
-	payload: payloadProps;
+	payload: {
+		email_confirmed: boolean;
+		account_created: Date;
+		email: string;
+		password: string;
+		first_name: string;
+		last_name: string;
+		phone_number: string;
+		__v: number;
+		date_of_birth: string;
+		center: string;
+		profile_image: string;
+		notification_token: string;
+		membership_type: string;
+	};
 }
 
 const authReducer = (state: {}, { payload, type }: actionProps): object => {

@@ -9,10 +9,9 @@ const logo = require("../../images/whitelogo.png");
 const ResolveAuthentication = (): JSX.Element => {
 	const navigate = useNavigate();
 	const context = useContext(AuthContext);
+	const token: string | null = localStorage.getItem("token");
 
 	const localSignIn = () => {
-		const token: string | null = localStorage.getItem("token");
-
 		setTimeout(async () => {
 			if (token) {
 				try {
@@ -22,12 +21,17 @@ const ResolveAuthentication = (): JSX.Element => {
 					navigate("/bacenta/home");
 				} catch (error) {
 					context?.addError("Error signing in, try again");
+					alert("Problems");
 				}
+			} else {
+				navigate("/signin");
 			}
 		}, 1500);
 	};
 
-	useEffect(localSignIn, [localSignIn]);
+	useEffect(() => {
+		localSignIn();
+	}, [localSignIn]);
 
 	return (
 		<main className="bg-gradient-to-r from-orange-300 via-purple-500 to-amber-300">

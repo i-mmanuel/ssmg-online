@@ -8,7 +8,7 @@ const SignUp = (): JSX.Element => {
 	return (
 		<Forms>
 			<div className="signup">
-				<div className="container">
+				<div className="container my-container">
 					<div className="signup-content">
 						<div className="signup-form">
 							<h2 className="form-title">Sign up</h2>
@@ -82,7 +82,7 @@ const SignUp = (): JSX.Element => {
 								<img src={signUpImage} />
 							</figure>
 							<Link to="/" />
-							<a href="/" className="signup-image-link underline underline-offset-4">
+							<a href="/signin" className="signup-image-link underline underline-offset-4">
 								I am already member
 							</a>
 						</div>

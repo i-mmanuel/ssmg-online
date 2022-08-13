@@ -213,6 +213,7 @@ input,
 select,
 textarea {
 	outline: none;
+	font-size: inherit !important;
 	appearance: unset !important;
 	-moz-appearance: unset !important;
 	-webkit-appearance: unset !important;
@@ -300,24 +301,27 @@ body {
 	font-family: Poppins;
 }
 
-.container {
-	width: 900px;
-	background: #fff;
-	/* background: rgba(230, 233, 239); */
-	backdrop-filter: blur(5px);
-	margin: 0 auto;
+.my-container {
 	box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-	margin-bottom: 100px;
-	-moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-	-webkit-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-	-o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-	-ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-	border-radius: 20px;
+	backdrop-filter: blur(5px);
 	box-shadow: 10px 10px 60px rgb(253 186 116), -5px -5px 80px rgb(252 211 77);
+	-moz-box-shadow: 10px 10px 60px rgb(253 186 116), -5px -5px 80px rgb(252 211 77);
+	-webkit-box-shadow: 10px 10px 60px rgb(253 186 116), -5px -5px 80px rgb(252 211 77);
+	-ms-box-shadow: 10px 10px 60px rgb(253 186 116), -5px -5px 80px rgb(252 211 77);
+	-o-box-shadow: 10px 10px 60px rgb(253 186 116), -5px -5px 80px rgb(252 211 77);
+	border-radius: 20px;
+	background: #fff;
 	-moz-border-radius: 20px;
 	-webkit-border-radius: 20px;
 	-o-border-radius: 20px;
 	-ms-border-radius: 20px;
+}
+
+.container {
+	width: 900px;
+	/* background: rgba(230, 233, 239); */
+	margin: 0 auto;
+	margin-bottom: 100px;
 }
 
 .display-flex {
@@ -456,7 +460,7 @@ select {
 	display: block;
 	border: none;
 	border-bottom: 1px solid #999;
-	padding: 6px 30px;
+	padding-left: 1.75rem !important;
 	font-family: Poppins;
 	box-sizing: border-box;
 }

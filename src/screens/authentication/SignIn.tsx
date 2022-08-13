@@ -49,7 +49,7 @@ const SignIn = (): JSX.Element => {
 	return (
 		<Forms>
 			<section className="sign-in animate__animated animate__fadeIn">
-				<div className="container">
+				<div className="container my-container">
 					<div className="signin-content">
 						<div className="signin-image">
 							<figure>
